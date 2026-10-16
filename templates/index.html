@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101810">
+  <meta name="description" content="Explora el universo de The Legend of Zelda: personajes, juegos, Hyrule y la legendaria Espada Maestra.">
+  <title>The Legend of Zelda | Hyrule Archives</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='character-polish.css') }}">
+  <script src="{{ url_for('static', filename='character-motion.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='home-interactions.js') }}" defer></script>
+</head>
+
+<body class="home-page">
+  <div class="reading-progress" role="progressbar" aria-label="Progreso de lectura"
+       aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <span aria-hidden="true"></span>
+  </div>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header" id="inicio">
+    <div class="header-inner">
+      <a class="brand" href="#inicio" aria-label="Hyrule Archives, inicio">
+        <span class="brand-symbol">✦</span>
+        <span class="brand-copy">
+          <strong>HYRULE</strong>
+          <small>ARCHIVES</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false"
+              aria-controls="main-nav" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#universo">Universo</a>
+        <a href="#personajes">Personajes</a>
+        <a href="#eras">Eras</a>
+        <a href="#explorar-hyrule">Mapa</a>
+        <a href="#juegos">Juegos</a>
+        <a href="#galeria">Galería</a>
+        <a href="#quiz">Quiz</a>
+        <a href="{{ url_for('espada') }}">Espada Maestra</a>
+      </nav>
+
+      <a class="header-cta" href="#explorar-hyrule">Explorar Hyrule <span>↗</span></a>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" aria-labelledby="hero-title">
+      <video class="hero-video" muted loop playsinline preload="none"
+             poster="{{ url_for('static', filename='fondos.jpg') }}">
+        <source data-src="{{ url_for('static', filename='zeldaO.mp4') }}" type="video/mp4">
+      </video>
+
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow"><span></span> UNA LEYENDA QUE TRASCIENDE EL TIEMPO <span></span></p>
+        <h1 id="hero-title">THE LEGEND<br>OF <em>ZELDA</em></h1>
+        <p class="hero-description">
+          Un reino antiguo. Un héroe elegido. Una princesa destinada a proteger
+          la luz. Descubre los secretos de Hyrule y escribe tu propia leyenda.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#universo">Descubrir el universo <span>↗</span></a>
+          <a class="btn btn-outline" href="#juegos">Explorar videojuegos</a>
+        </div>
+
+        <div class="hero-caption">
+          <span class="caption-line"></span>
+          <span>EL DESTINO DE HYRULE ESTÁ EN TUS MANOS</span>
+        </div>
+      </div>
+
+      <a class="scroll-indicator" href="#universo" aria-label="Desplazarse hacia abajo">
+        <span></span> DESLIZA PARA EXPLORAR
+      </a>
+    </section>
+
+    <section class="intro-section section-shell" id="universo">
+      <div class="section-heading">
+        <p class="eyebrow">MÁS ALLÁ DE LA LEYENDA</p>
+        <h2>Un mundo lleno de <em>misterios</em></h2>
+        <p>
+          Desde templos olvidados hasta tierras que desafían la imaginación,
+          cada rincón de Hyrule guarda una historia.
+        </p>
+      </div>
+
+      <div class="info-grid">
+        <article class="info-card info-card--history"
+                 style="--card-image: url('{{ url_for('static', filename='hyrule-era.jpg') }}')">
+          <span class="card-number">01 / HISTORIA</span>
+          <div class="info-card-content">
+            <span class="card-icon">⌘</span>
+            <h3>La leyenda eterna</h3>
+            <p>Conoce las fuerzas, profecías y acontecimientos que conectan las distintas eras.</p>
+            <a href="#juegos" class="text-link">Conocer la historia <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="info-card info-card--saga"
+                 style="--card-image: url('{{ url_for('static', filename='hyrule.jpg') }}')">
+          <span class="card-number">02 / AVENTURA</span>
+          <div class="info-card-content">
+            <span class="card-icon">✧</span>
+            <h3>Una saga legendaria</h3>
+            <p>Explora aventuras, acertijos, mazmorras y secretos escondidos entre generaciones.</p>
+            <a href="#juegos" class="text-link">Ver la saga <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="info-card info-card--hyrule"
+                 style="--card-image: url('{{ url_for('static', filename='fondos.jpg') }}')">
+          <span class="card-number">03 / EXPLORACIÓN</span>
+          <div class="info-card-content">
+            <span class="card-icon">⌖</span>
+            <h3>El reino de Hyrule</h3>
+            <p>Recorre paisajes extraordinarios donde cada camino puede revelar un nuevo secreto.</p>
+            <a href="#personajes" class="text-link">Entrar al reino <span>↗</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="characters-section section-shell" id="personajes">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">HÉROES Y LEYENDAS</p>
+          <h2>Los rostros de <em>Hyrule</em></h2>
+        </div>
+        <p>Tres destinos unidos por una historia que se repite a través del tiempo.</p>
+      </div>
+
+      <div class="character-carousel" role="region" aria-label="Carrusel de personajes">
+        <button class="carousel-control carousel-previous" type="button" aria-label="Personaje anterior">←</button>
+        <div class="character-grid" id="character-carousel" tabindex="0" aria-label="Personajes de Hyrule">
+        <article class="character-card character-link"
+                 style="--character-image: url('{{ url_for('static', filename='link-card.jpg') }}')">
+          <span class="character-index">01</span>
+          <button class="favorite-toggle" type="button" data-favorite-id="link" data-favorite-title="Link" aria-pressed="false" aria-label="Guardar Link en favoritos">♡</button>
+          <div class="character-info">
+            <span class="character-role">EL HÉROE</span>
+            <h3>Link</h3>
+            <p>El espíritu valiente que se alza frente a la oscuridad.</p>
+            <a class="character-link-action" href="{{ url_for('link') }}">Descubrir personaje <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="character-card character-zelda"
+                 style="--character-image: url('{{ url_for('static', filename='Zelda-card.jpg') }}')">
+          <span class="character-index">02</span>
+          <button class="favorite-toggle" type="button" data-favorite-id="zelda" data-favorite-title="Zelda" aria-pressed="false" aria-label="Guardar Zelda en favoritos">♡</button>
+          <div class="character-info">
+            <span class="character-role">LA PRINCESA</span>
+            <h3>Zelda</h3>
+            <p>Sabiduría, coraje y una fuerza ligada al destino del reino.</p>
+            <a class="character-link-action" href="{{ url_for('zelda') }}">Descubrir personaje <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="character-card character-ganon"
+                 style="--character-image: url('{{ url_for('static', filename='ganon-card.jpg') }}')">
+          <span class="character-index">03</span>
+          <button class="favorite-toggle" type="button" data-favorite-id="ganondorf" data-favorite-title="Ganondorf" aria-pressed="false" aria-label="Guardar Ganondorf en favoritos">♡</button>
+          <div class="character-info">
+            <span class="character-role">EL REY DEMONIO</span>
+            <h3>Ganondorf</h3>
+            <p>Una ambición inmensa que amenaza con consumir Hyrule.</p>
+            <a class="character-link-action" href="{{ url_for('ganondorf') }}">Descubrir personaje <span>↗</span></a>
+          </div>
+        </article>
+        </div>
+        <button class="carousel-control carousel-next" type="button" aria-label="Siguiente personaje">→</button>
+      </div>
+      <div class="carousel-footer">
+        <div class="carousel-dots" aria-label="Elegir personaje"></div>
+        <span class="carousel-position" aria-live="polite">1 / 3</span>
+      </div>
+    </section>
+
+    <section class="era-section section-shell" id="eras">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">UN DESTINO QUE SE REPITE</p>
+          <h2>Explora las <em>eras de Hyrule</em></h2>
+        </div>
+        <p>Cambia de era para descubrir cómo evoluciona la leyenda.</p>
+      </div>
+      <div class="era-tabs" role="tablist" aria-label="Eras de Hyrule">
+        <button type="button" role="tab" id="era-tab-classic" aria-controls="era-panel" aria-selected="true" data-era="classic">La leyenda clásica</button>
+        <button type="button" role="tab" id="era-tab-twilight" aria-controls="era-panel" aria-selected="false" data-era="twilight">Luz y sombras</button>
+        <button type="button" role="tab" id="era-tab-wild" aria-controls="era-panel" aria-selected="false" data-era="wild">Un mundo salvaje</button>
+      </div>
+      <article class="era-panel" id="era-panel" role="tabpanel" aria-labelledby="era-tab-classic">
+        <span class="era-panel-index">ERA 01 · 1998</span>
+        <h3>El tiempo despierta una leyenda</h3>
+        <p>Ocarina of Time lleva a Link a través de distintas edades de Hyrule para enfrentarse al poder de Ganondorf.</p>
+        <a class="text-link" href="#juegos" data-era-game="Ocarina of Time">Ver aventuras de esta era <span>↗</span></a>
+      </article>
+      <div class="era-rail" aria-hidden="true"><span></span></div>
+    </section>
+
+    <section class="hyrule-explore section-shell" id="explorar-hyrule">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">CARTOGRAFÍA INTERACTIVA · HYRULE</p>
+          <h2>El reino guarda <em>muchas historias</em></h2>
+        </div>
+        <p>Elige un destino en el mapa y descubre las leyendas que viven entre sus bosques, montañas y desiertos.</p>
+      </div>
+      <div class="hyrule-map">
+        <img class="map-scene is-active" src="{{ url_for('static', filename='Castillo.jpg') }}" alt="" decoding="async">
+        <img class="map-scene map-scene-next" alt="" aria-hidden="true" decoding="async">
+        <div class="map-heading" aria-hidden="true">
+          <span class="map-compass">✦</span>
+          <span><strong>ATLAS DE HYRULE</strong><small>ELIGE TU PRÓXIMO DESTINO</small></span>
+          <span class="map-coordinate">34° 42′ N</span>
+        </div>
+        <button class="map-location is-selected" type="button" style="--map-x:50%;--map-y:48%" data-place="castle" data-map-image="{{ url_for('static', filename='Castillo.jpg') }}" data-map-position="center 57%" aria-label="Explorar Castillo de Hyrule" aria-pressed="true"><span class="map-pin" aria-hidden="true">✦</span><span class="map-label">Castillo</span></button>
+        <button class="map-location" type="button" style="--map-x:19%;--map-y:58%" data-place="forest" data-map-image="{{ url_for('static', filename='Bosque.jpg') }}" data-map-position="center 50%" aria-label="Explorar Bosques Perdidos" aria-pressed="false"><span class="map-pin" aria-hidden="true">✦</span><span class="map-label">Bosque</span></button>
+        <button class="map-location" type="button" style="--map-x:54%;--map-y:28%" data-place="mountain" data-map-image="{{ url_for('static', filename='Montana.jpg') }}" data-map-position="center 50%" aria-label="Explorar Montañas de la Muerte" aria-pressed="false"><span class="map-pin" aria-hidden="true">✦</span><span class="map-label">Montañas</span></button>
+        <button class="map-location" type="button" style="--map-x:54%;--map-y:70%" data-place="desert" data-map-image="{{ url_for('static', filename='Desierto.png') }}" data-map-position="center 50%" aria-label="Explorar Desierto Gerudo" aria-pressed="false"><span class="map-pin" aria-hidden="true">✦</span><span class="map-label">Desierto</span></button>
+        <div class="map-detail" aria-live="polite">
+          <span class="map-detail-kicker"><span id="map-place-count">DESTINO 01 / 04</span><span>✦</span></span>
+          <h3>Castillo de Hyrule</h3>
+          <p>El corazón del reino, hogar de la familia real y escenario de muchos momentos decisivos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sword-section" id="espada">
+      <div class="sword-backdrop" aria-hidden="true"></div>
+      <div class="sword-content">
+        <p class="eyebrow">EL SÍMBOLO DEL HÉROE</p>
+        <h2>La <em>Espada Maestra</em></h2>
+        <p class="sword-description">
+          Forjada para enfrentar la oscuridad, esta espada legendaria representa
+          el valor y la esperanza que protegen al reino.
+        </p>
+        <a class="btn btn-primary" href="{{ url_for('espada') }}">Descubrir su leyenda <span>↗</span></a>
+      </div>
+
+      <div class="sword-image-wrap">
+        <button class="favorite-toggle" type="button" data-favorite-id="sword" data-favorite-title="Espada Maestra" data-favorite-href="{{ url_for('espada') }}" aria-pressed="false" aria-label="Guardar Espada Maestra en favoritos">♡</button>
+        <img
+          src="{{ url_for('static', filename='mastersword.jpg') }}"
+          alt="La Espada Maestra de The Legend of Zelda"
+          class="sword-image"
+          loading="lazy"
+          decoding="async"
+          onerror="this.closest('.sword-image-wrap').classList.add('image-missing')">
+        <span class="sword-image-fallback">ESPADA MAESTRA</span>
+      </div>
+    </section>
+
+    <section class="games-section section-shell" id="juegos">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">CRONOLOGÍAS Y AVENTURAS</p>
+          <h2>Historias que <em>perduran</em></h2>
+        </div>
+        <p>Elige una aventura y vuelve a descubrir la magia de la saga.</p>
+      </div>
+
+      <div class="game-grid" id="game-grid">
+        <article class="game-card"
+                 style="--game-image: url('{{ url_for('static', filename='ocarina.jpg') }}')"
+                 data-title="Ocarina of Time"
+                 data-year="1998"
+                 data-platform="Nintendo 64"
+                 data-description="Acompaña a Link en una aventura a través del tiempo para detener a Ganondorf y salvar Hyrule.">
+          <button class="favorite-toggle" type="button" data-favorite-id="ocarina" data-favorite-title="Ocarina of Time" aria-pressed="false" aria-label="Guardar Ocarina of Time en favoritos">♡</button>
+          <div class="game-card-content">
+            <span class="game-era">LA LEYENDA CLÁSICA</span>
+            <span class="game-year">1998</span>
+            <h3>Ocarina of Time</h3>
+            <p>El viaje que marcó una era.</p>
+            <button class="game-details" type="button">Ver detalles <span>↗</span></button>
+          </div>
+        </article>
+
+        <article class="game-card"
+                 style="--game-image: url('{{ url_for('static', filename='Th.jpg') }}')"
+                 data-title="Twilight Princess"
+                 data-year="2006"
+                 data-platform="Nintendo GameCube / Wii"
+                 data-description="Cruza el límite entre la luz y las sombras en una aventura donde el destino de Hyrule está en juego.">
+          <button class="favorite-toggle" type="button" data-favorite-id="twilight" data-favorite-title="Twilight Princess" aria-pressed="false" aria-label="Guardar Twilight Princess en favoritos">♡</button>
+          <div class="game-card-content">
+            <span class="game-era">LUZ Y OSCURIDAD</span>
+            <span class="game-year">2006</span>
+            <h3>Twilight Princess</h3>
+            <p>El reino bajo las sombras.</p>
+            <button class="game-details" type="button">Ver detalles <span>↗</span></button>
+          </div>
+        </article>
+
+        <article class="game-card"
+                 style="--game-image: url('{{ url_for('static', filename='Breath.jpg') }}')"
+                 data-title="Breath of the Wild"
+                 data-year="2017"
+                 data-platform="Nintendo Switch / Wii U"
+                 data-description="Despierta en un mundo inmenso y descubre por tu cuenta los secretos de un Hyrule transformado.">
+          <button class="favorite-toggle" type="button" data-favorite-id="breath" data-favorite-title="Breath of the Wild" aria-pressed="false" aria-label="Guardar Breath of the Wild en favoritos">♡</button>
+          <div class="game-card-content">
+            <span class="game-era">LIBERTAD Y EXPLORACIÓN</span>
+            <span class="game-year">2017</span>
+            <h3>Breath of the Wild</h3>
+            <p>Una aventura sin fronteras.</p>
+            <button class="game-details" type="button">Ver detalles <span>↗</span></button>
+          </div>
+        </article>
+
+        <article class="game-card"
+                 style="--game-image: url('{{ url_for('static', filename='tears.jpg') }}')"
+                 data-title="Tears of the Kingdom"
+                 data-year="2023"
+                 data-platform="Nintendo Switch"
+                 data-description="Explora las tierras, los cielos y las profundidades de Hyrule en una aventura llena de posibilidades.">
+          <button class="favorite-toggle" type="button" data-favorite-id="tears" data-favorite-title="Tears of the Kingdom" aria-pressed="false" aria-label="Guardar Tears of the Kingdom en favoritos">♡</button>
+          <div class="game-card-content">
+            <span class="game-era">UN MUNDO RENOVADO</span>
+            <span class="game-year">2023</span>
+            <h3>Tears of the Kingdom</h3>
+            <p>El cielo es solo el comienzo.</p>
+            <button class="game-details" type="button">Ver detalles <span>↗</span></button>
+          </div>
+        </article>
+      </div>
+
+    </section>
+
+    <section class="favorites-section section-shell" id="favoritos">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">TU COLECCIÓN PERSONAL</p>
+          <h2>Favoritos de <em>Hyrule</em></h2>
+        </div>
+        <p>Guarda personajes y aventuras con el corazón para tenerlos a mano.</p>
+      </div>
+      <div class="favorites-list" id="favorites-list" aria-live="polite">
+        <p class="favorites-empty">Todavía no guardas favoritos. Pulsa ♡ en un personaje o juego.</p>
+      </div>
+    </section>
+
+    <section class="gallery-section section-shell" id="galeria">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">RECUERDOS DE LA AVENTURA</p>
+          <h2>Galería de <em>Hyrule</em></h2>
+        </div>
+        <p>Abre una imagen para verla en grande y navega con las flechas o el teclado.</p>
+      </div>
+      <div class="gallery-grid">
+        <button class="gallery-item" type="button" data-gallery-src="{{ url_for('static', filename='Link.jpg') }}" data-gallery-alt="Link, héroe de Hyrule" data-gallery-caption="Link · El héroe de Hyrule"><img src="{{ url_for('static', filename='Link.jpg') }}" alt="" loading="lazy" decoding="async"><span>LINK</span></button>
+        <button class="gallery-item" type="button" data-gallery-src="{{ url_for('static', filename='zelda.jpg') }}" data-gallery-alt="Zelda, princesa de Hyrule" data-gallery-caption="Zelda · La princesa de Hyrule"><img src="{{ url_for('static', filename='zelda.jpg') }}" alt="" loading="lazy" decoding="async"><span>ZELDA</span></button>
+        <button class="gallery-item" type="button" data-gallery-src="{{ url_for('static', filename='Ganon.jpg') }}" data-gallery-alt="Ganondorf, rey demonio" data-gallery-caption="Ganondorf · Rey demonio"><img src="{{ url_for('static', filename='Ganon.jpg') }}" alt="" loading="lazy" decoding="async"><span>GANONDORF</span></button>
+        <button class="gallery-item" type="button" data-gallery-src="{{ url_for('static', filename='mastersword.jpg') }}" data-gallery-alt="La Espada Maestra" data-gallery-caption="Espada Maestra · El símbolo del héroe"><img src="{{ url_for('static', filename='mastersword.jpg') }}" alt="" loading="lazy" decoding="async"><span>ESPADA MAESTRA</span></button>
+        <button class="gallery-item" type="button" data-gallery-src="{{ url_for('static', filename='ocarina.jpg') }}" data-gallery-alt="Ocarina of Time" data-gallery-caption="Ocarina of Time · La leyenda clásica"><img src="{{ url_for('static', filename='ocarina.jpg') }}" alt="" loading="lazy" decoding="async"><span>OCARINA OF TIME</span></button>
+        <button class="gallery-item" type="button" data-gallery-src="{{ url_for('static', filename='Th.jpg') }}" data-gallery-alt="Twilight Princess" data-gallery-caption="Twilight Princess · Luz y sombras"><img src="{{ url_for('static', filename='Th.jpg') }}" alt="" loading="lazy" decoding="async"><span>TWILIGHT PRINCESS</span></button>
+        <button class="gallery-item" type="button" data-gallery-src="{{ url_for('static', filename='Breath.jpg') }}" data-gallery-alt="Breath of the Wild" data-gallery-caption="Breath of the Wild · Libertad y exploración"><img src="{{ url_for('static', filename='Breath.jpg') }}" alt="" loading="lazy" decoding="async"><span>BREATH OF THE WILD</span></button>
+        <button class="gallery-item" type="button" data-gallery-src="{{ url_for('static', filename='tears.jpg') }}" data-gallery-alt="Tears of the Kingdom" data-gallery-caption="Tears of the Kingdom · Un mundo renovado"><img src="{{ url_for('static', filename='tears.jpg') }}" alt="" loading="lazy" decoding="async"><span>TEARS OF THE KINGDOM</span></button>
+      </div>
+    </section>
+
+    <section class="quiz-section section-shell" id="quiz">
+      <div class="quiz-shell">
+        <div class="quiz-intro">
+          <p class="eyebrow">PON A PRUEBA TU SABIDURÍA</p>
+          <h2>¿Cuánto sabes de <em>Hyrule?</em></h2>
+          <p>Responde cinco preguntas y descubre tu rango de aventurero.</p>
+          <p class="quiz-best" id="quiz-best" aria-live="polite">RÉCORD: 0 / 5</p>
+          <button class="btn btn-primary" id="quiz-start" type="button">Comenzar reto <span>↗</span></button>
+        </div>
+        <div class="quiz-play" id="quiz-play" hidden>
+          <div class="quiz-meta"><span id="quiz-progress">PREGUNTA 1 DE 5</span><span id="quiz-score">ACIERTOS: 0</span></div>
+          <h3 id="quiz-question"></h3>
+          <div class="quiz-answers" id="quiz-answers"></div>
+          <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+          <button class="btn btn-outline" id="quiz-next" type="button" hidden>Siguiente pregunta <span>→</span></button>
+        </div>
+        <div class="quiz-result" id="quiz-result" hidden aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="search-section section-shell" id="buscar">
+      <div class="archive-search-panel">
+        <div>
+          <p class="eyebrow">TU PRÓXIMA AVENTURA</p>
+          <h2>¿Qué buscas en <em>Hyrule?</em></h2>
+          <p>Busca personajes o videojuegos para encontrar rápidamente lo que te interesa.</p>
+        </div>
+        <form id="site-search-form" class="site-search-form" role="search">
+          <label class="sr-only" for="site-search">Buscar en Hyrule Archives</label>
+          <input type="search" id="site-search" placeholder="Link, Zelda, Ocarina of Time..." autocomplete="off">
+          <button class="btn btn-primary" type="submit">Buscar <span>⌕</span></button>
+          <div class="search-results" id="search-results" role="listbox" aria-label="Sugerencias de búsqueda" aria-live="polite" hidden></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="contact-section section-shell" id="contacto">
+      <p class="eyebrow">LA AVENTURA CONTINÚA</p>
+      <h2>Hyrule siempre <em>te espera</em></h2>
+      <p>Un archivo creado para explorar, recordar y celebrar una de las sagas más queridas de los videojuegos.</p>
+      <a class="btn btn-outline" href="#inicio">Volver al inicio ↑</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#inicio">
+      <span class="brand-symbol">✦</span>
+      <span class="brand-copy"><strong>HYRULE</strong><small>ARCHIVES</small></span>
+    </a>
+    <p>Proyecto de fans. The Legend of Zelda pertenece a Nintendo.</p>
+    <a href="#inicio" class="footer-top">VOLVER ARRIBA ↑</a>
+  </footer>
+  <p class="interaction-status" id="interaction-status" role="status" aria-live="polite"></p>
+  <button class="secret-rune secret-rune-hero" type="button" data-rune="hero" aria-label="Símbolo misterioso encontrado en la portada" title="Un símbolo antiguo">△</button>
+  <button class="secret-rune secret-rune-sword" type="button" data-rune="sword" aria-label="Símbolo misterioso encontrado junto a la espada" title="Un símbolo antiguo">△</button>
+  <button class="secret-rune secret-rune-footer" type="button" data-rune="footer" aria-label="Símbolo misterioso encontrado al final de la página" title="Un símbolo antiguo">△</button>
+
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Volver arriba">↑</button>
+
+  <dialog class="game-modal" id="game-modal" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar ventana">×</button>
+    <p class="eyebrow" id="modal-platform">AVENTURA LEGENDARIA</p>
+    <h2 id="modal-title">Título del juego</h2>
+    <p class="modal-year" id="modal-year"></p>
+    <p id="modal-description"></p>
+    <button class="btn btn-primary" id="modal-done" type="button">Cerrar</button>
+  </dialog>
+
+  <dialog class="gallery-modal" id="gallery-modal" aria-label="Galería de imágenes">
+    <button class="modal-close" type="button" data-gallery-close aria-label="Cerrar galería">×</button>
+    <button class="gallery-nav gallery-prev" type="button" aria-label="Imagen anterior">←</button>
+    <figure><img id="gallery-large" alt=""><figcaption id="gallery-caption"></figcaption></figure>
+    <button class="gallery-nav gallery-next" type="button" aria-label="Siguiente imagen">→</button>
+  </dialog>
+
+  <script>
+    const gameCards = [...document.querySelectorAll('.game-card')];
+
+    const modal = document.querySelector('#game-modal');
+    const modalTitle = document.querySelector('#modal-title');
+    const modalPlatform = document.querySelector('#modal-platform');
+    const modalYear = document.querySelector('#modal-year');
+    const modalDescription = document.querySelector('#modal-description');
+
+    gameCards.forEach(card => {
+      card.querySelector('.game-details').addEventListener('click', () => {
+        modalTitle.textContent = card.dataset.title;
+        modalPlatform.textContent = card.dataset.platform;
+        modalYear.textContent = card.dataset.year;
+        modalDescription.textContent = card.dataset.description;
+        modal.showModal();
+      });
+    });
+
+    document.querySelector('#modal-close').addEventListener('click', () => modal.close());
+    document.querySelector('#modal-done').addEventListener('click', () => modal.close());
+
+    modal.addEventListener('click', event => {
+      if (event.target === modal) modal.close();
+    });
+
+    const backToTop = document.querySelector('#back-to-top');
+
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('is-visible', window.scrollY > 500);
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+      });
+    });
+
+  </script>
+</body>
+</html>

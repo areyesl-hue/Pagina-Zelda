@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Link | Héroe de Hyrule</title>
+    <meta name="description" content="Descubre la historia, las habilidades y el legado de Link, el héroe de Hyrule.">
+    <meta name="theme-color" content="#080d0b">
+
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='Link.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #c9b477;
+            --gold-light: #f1e5bd;
+            --dark: #080d0b;
+            --muted: #aab5ae;
+            --line: rgba(201, 180, 119, .24);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            background: var(--dark);
+            color: #f5f5ef;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .link-site {
+            min-height: 100vh;
+            background: var(--dark);
+        }
+
+        /* NAVEGACIÓN */
+
+        .topbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            width: 100%;
+            min-height: 88px;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            border-bottom: 1px solid rgba(255,255,255,.12);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .brand-symbol {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            transform: rotate(45deg);
+        }
+
+        .brand-symbol span {
+            transform: rotate(-45deg);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #d0d6d1;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            transition: color .25s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .nav-links .nav-back {
+            padding: 12px 18px;
+            border: 1px solid var(--line);
+            color: var(--gold-light);
+        }
+
+        /* PORTADA */
+
+        .hero {
+            position: relative;
+            min-height: 780px;
+            min-height: min(900px, 100svh);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: #101a15;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(4, 11, 8, .96) 0%,
+                    rgba(5, 15, 11, .83) 38%,
+                    rgba(5, 15, 11, .38) 73%,
+                    rgba(4, 10, 8, .65) 100%
+                ),
+                linear-gradient(
+                    0deg,
+                    #080d0b 0%,
+                    transparent 38%
+                ),
+                url("{{ url_for('static', filename='link-card.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            animation: reveal 1.2s ease-out both;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: min(1240px, 100%);
+            padding: 150px 7% 115px;
+            animation: rise .9s .1s both;
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 38px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero h1 {
+            max-width: 780px;
+            color: #fffdf6;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(70px, 11vw, 145px);
+            font-weight: 500;
+            letter-spacing: -4px;
+            line-height: 1.05;
+            text-shadow: 0 8px 60px rgba(0,0,0,.3);
+        }
+
+        .hero h1 span {
+            display: block;
+            margin-top: 15px;
+            color: var(--gold-light);
+            font-size: clamp(15px, 2vw, 24px);
+            font-weight: 400;
+            letter-spacing: 7px;
+        }
+
+        .hero-subtitle {
+            margin-top: 30px;
+            color: #d9ddcf;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+
+        .hero-description {
+            max-width: 510px;
+            margin-top: 23px;
+            color: #c2cbc4;
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+            margin-top: 36px;
+        }
+
+        .button {
+            min-height: 52px;
+            padding: 0 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            transition: transform .25s, background .25s, border-color .25s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .button-primary {
+            color: #10130d;
+            background: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .button-primary:hover {
+            background: var(--gold-light);
+        }
+
+        .button-secondary {
+            color: #fff;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.35);
+        }
+
+        .button-secondary:hover {
+            border-color: var(--gold);
+            background: rgba(201,180,119,.08);
+        }
+
+        .hero-index {
+            position: absolute;
+            z-index: 3;
+            right: 7%;
+            bottom: 60px;
+            color: rgba(255,255,255,.7);
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .hero-index strong {
+            color: var(--gold);
+        }
+
+        /* ATRIBUTOS */
+
+        .identity-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: #0c120f;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .identity-item {
+            min-height: 115px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            text-align: center;
+        }
+
+        .identity-item + .identity-item {
+            border-left: 1px solid var(--line);
+        }
+
+        .identity-item span {
+            color: var(--gold);
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .identity-item h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* HISTORIA */
+
+        .section {
+            padding: 110px 7%;
+        }
+
+        .story-section {
+            background:
+                radial-gradient(ellipse at 100% 10%, rgba(39,76,51,.15), transparent 45%),
+                #090e0b;
+        }
+
+        .section-heading {
+            max-width: 700px;
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+
+        .section-heading h2 {
+            margin-top: 18px;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(32px, 5vw, 54px);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .section-heading p {
+            max-width: 620px;
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        .story-layout {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 75px;
+            align-items: start;
+        }
+
+        .story-number {
+            color: rgba(201,180,119,.2);
+            font-family: 'Cinzel', serif;
+            font-size: clamp(100px, 15vw, 180px);
+            line-height: 1;
+        }
+
+        .story-copy h3 {
+            margin-bottom: 20px;
+            color: var(--gold-light);
+            font-family: 'Cinzel', serif;
+            font-size: 25px;
+            font-weight: 500;
+        }
+
+        .story-copy p {
+            margin-bottom: 18px;
+            color: #adb8b0;
+            font-size: 13px;
+            line-height: 2.1;
+        }
+
+        .story-divider {
+            width: 65px;
+            height: 1px;
+            margin: 28px 0;
+            background: var(--gold);
+        }
+
+        /* TARJETAS */
+
+        .lore-section {
+            background: #0d1410;
+            border-top: 1px solid rgba(255,255,255,.04);
+        }
+
+        .lore-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .lore-card {
+            position: relative;
+            min-height: 250px;
+            padding: 30px 27px;
+            overflow: hidden;
+            background: linear-gradient(145deg, #17221a, #0c110e);
+            border: 1px solid rgba(255,255,255,.08);
+            transition: transform .3s, border-color .3s;
+        }
+
+        .lore-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(201,180,119,.55);
+        }
+
+        .lore-card::after {
+            content: "";
+            position: absolute;
+            right: -60px;
+            bottom: -60px;
+            width: 110px;
+            height: 110px;
+            border: 1px solid rgba(201,180,119,.16);
+            transform: rotate(45deg);
+        }
+
+        .card-index {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .lore-card h3 {
+            margin-top: 31px;
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .lore-card p {
+            margin-top: 13px;
+            color: #adb8b0;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        /* CIERRE */
+
+        .closing-section {
+            padding: 105px 7%;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at center, rgba(94,114,59,.15), transparent 65%),
+                #080c09;
+            border-top: 1px solid var(--line);
+        }
+
+        .closing-mark {
+            margin-bottom: 25px;
+            color: var(--gold);
+            font-size: 30px;
+        }
+
+        .closing-section h2 {
+            max-width: 760px;
+            margin: 18px auto 0;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(30px, 5vw, 53px);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .closing-section p {
+            max-width: 530px;
+            margin: 22px auto 30px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        /* PIE */
+
+        .footer {
+            min-height: 100px;
+            padding: 28px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: #060907;
+            border-top: 1px solid rgba(255,255,255,.08);
+        }
+
+        .footer p,
+        .footer a {
+            color: #858f87;
+            font-size: 9px;
+            letter-spacing: 1.4px;
+            line-height: 1.8;
+        }
+
+        .footer a:hover {
+            color: var(--gold);
+        }
+
+        /* MOVIMIENTO */
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes reveal {
+            from {
+                opacity: .5;
+                transform: scale(1.07);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1.025);
+            }
+        }
+
+        /* TABLET */
+
+        @media (max-width: 900px) {
+            .topbar {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .nav-links {
+                gap: 17px;
+            }
+
+            .nav-links a {
+                font-size: 9px;
+                letter-spacing: 1px;
+            }
+
+            .story-layout {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .story-number {
+                font-size: 100px;
+            }
+
+            .lore-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* MÓVIL */
+
+        @media (max-width: 600px) {
+            .topbar {
+                min-height: 75px;
+                padding: 17px 5%;
+            }
+
+            .brand {
+                gap: 10px;
+                font-size: 10px;
+                letter-spacing: 1.3px;
+            }
+
+            .brand-symbol {
+                width: 27px;
+                height: 27px;
+                font-size: 12px;
+            }
+
+            .nav-links {
+                gap: 0;
+            }
+
+            .nav-links .nav-section-link {
+                display: none;
+            }
+
+            .nav-links .nav-back {
+                padding: 10px 12px;
+                font-size: 9px;
+            }
+
+            .hero {
+                min-height: 760px;
+                min-height: 94svh;
+            }
+
+            .hero-background {
+                background-position: 58% center;
+            }
+
+            .hero-content {
+                padding: 135px 6% 95px;
+            }
+
+            .eyebrow {
+                font-size: 9px;
+                letter-spacing: 2.5px;
+            }
+
+            .hero h1 {
+                font-size: clamp(62px, 16vw, 88px);
+                letter-spacing: -2px;
+            }
+
+            .hero h1 span {
+                font-size: .36em;
+                letter-spacing: 4px;
+                line-height: 1.7;
+            }
+
+            .hero-subtitle {
+                font-size: 9px;
+                letter-spacing: 2px;
+            }
+
+            .hero-description {
+                font-size: 12px;
+                line-height: 1.9;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .hero-index {
+                right: 6%;
+                bottom: 25px;
+                font-size: 8px;
+            }
+
+            .identity-item {
+                min-height: 95px;
+                padding: 18px 7px;
+            }
+
+            .identity-item span {
+                font-size: 7px;
+                letter-spacing: 1px;
+            }
+
+            .identity-item h2 {
+                font-size: 10px;
+            }
+
+            .section {
+                padding: 75px 6%;
+            }
+
+            .section-heading {
+                margin-bottom: 33px;
+            }
+
+            .section-heading h2 {
+                font-size: 32px;
+            }
+
+            .story-number {
+                font-size: 85px;
+            }
+
+            .story-copy h3 {
+                font-size: 22px;
+            }
+
+            .lore-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lore-card {
+                min-height: 210px;
+                padding: 26px;
+            }
+
+            .closing-section {
+                padding: 80px 6%;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='character-polish.css') }}">
+    <script src="{{ url_for('static', filename='character-motion.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='profile-interactions.js') }}" defer></script>
+</head>
+
+<body>
+<div class="reading-progress" role="progressbar" aria-label="Progreso de lectura"
+     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <span aria-hidden="true"></span>
+</div>
+<div class="link-site">
+
+    <header class="topbar">
+
+        <a href="/" class="brand" aria-label="Volver al inicio">
+            <span class="brand-symbol"><span>✦</span></span>
+            <span>HYRULE ARCHIVES</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navegación principal">
+            <a class="nav-section-link" href="#historia">HISTORIA</a>
+            <a class="nav-section-link" href="#legado">LEGADO</a>
+            <span class="nav-world-links" aria-label="Explorar personajes">
+                <a href="{{ url_for('link') }}" aria-current="page">LINK</a>
+                <a href="{{ url_for('zelda') }}">ZELDA</a>
+                <a href="{{ url_for('ganondorf') }}">GANONDORF</a>
+                <a href="{{ url_for('espada') }}">ESPADA MAESTRA</a>
+            </span>
+            <a class="nav-back" href="/">← INICIO</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section class="hero" aria-labelledby="hero-title">
+
+            <div class="hero-background" aria-hidden="true"></div>
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    LAS CRÓNICAS DE HYRULE
+                </div>
+
+                <h1 id="hero-title">
+                    LINK
+                    <span>EL HÉROE DE HYRULE</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    VALOR · DESTINO · LEYENDA
+                </p>
+
+                <p class="hero-description">
+                    Un héroe llamado a recorrer tierras desconocidas,
+                    descubrir secretos ancestrales y enfrentarse a la
+                    oscuridad. Con la Espada Maestra y un valor inquebrantable,
+                    Link representa la esperanza de Hyrule.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="#historia" class="button button-primary">
+                        DESCUBRIR SU HISTORIA <span>↗</span>
+                    </a>
+
+                    <a href="#legado" class="button button-secondary">
+                        EXPLORAR SU LEGADO
+                    </a>
+                    <button class="button button-secondary profile-favorite" type="button"
+                            data-favorite-id="link" data-favorite-title="Link" data-favorite-href="{{ url_for('link') }}">
+                        ♡ GUARDAR EN FAVORITOS
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="hero-index">
+                <strong>01</strong> / PERSONAJES LEGENDARIOS
+            </div>
+
+        </section>
+
+        <section class="identity-strip" aria-label="Atributos de Link">
+
+            <div class="identity-item">
+                <span>01 / ARMA</span>
+                <h2>Espada Maestra</h2>
+            </div>
+
+            <div class="identity-item">
+                <span>02 / ESENCIA</span>
+                <h2>Valor</h2>
+            </div>
+
+            <div class="identity-item">
+                <span>03 / MISIÓN</span>
+                <h2>Proteger Hyrule</h2>
+            </div>
+
+        </section>
+
+        <section class="section story-section" id="historia">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    EL VIAJE DEL HÉROE
+                </span>
+
+                <h2>El valor cambia el destino.</h2>
+
+                <p>
+                    Una historia de aventuras, descubrimientos y desafíos
+                    que atraviesa distintas eras de Hyrule.
+                </p>
+
+            </div>
+
+            <div class="story-layout">
+
+                <figure class="story-portrait">
+                    <img src="{{ url_for('static', filename='Link.jpg') }}" alt="Link, héroe de Hyrule" loading="lazy" decoding="async">
+                    <button class="profile-gallery-open" type="button"
+                            data-profile-gallery-open
+                            data-gallery-extra="{{ url_for('static', filename='link-card.jpg') }}"
+                            data-gallery-extra-alt="Ilustración de Link para la colección"
+                            data-gallery-extra-caption="Link · El héroe de Hyrule"
+                            aria-label="Abrir galería de Link">VER GALERÍA <span aria-hidden="true">↗</span></button>
+                    <figcaption>01 / EL HÉROE</figcaption>
+                </figure>
+
+                <div class="story-copy">
+
+                    <h3>La leyenda del héroe</h3>
+
+                    <p>
+                        Link es el protagonista de numerosas aventuras de
+                        The Legend of Zelda. Aunque su origen y sus
+                        circunstancias varían entre juegos, su misión suele
+                        llevarlo a explorar el mundo, superar pruebas y
+                        enfrentarse a peligros que amenazan el reino.
+                    </p>
+
+                    <p>
+                        A lo largo de sus viajes, obtiene herramientas,
+                        descubre templos olvidados y aprende a utilizar
+                        sus habilidades para superar obstáculos cada vez
+                        más difíciles.
+                    </p>
+
+                    <div class="story-divider"></div>
+
+                    <p>
+                        Su leyenda no depende únicamente de sus armas.
+                        También nace de su determinación para avanzar,
+                        ayudar a otros y enfrentarse a lo desconocido
+                        cuando Hyrule necesita un héroe.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="section lore-section" id="legado">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    ARMAS, ALIANZAS Y DESAFÍOS
+                </span>
+
+                <h2>Los elementos de la leyenda.</h2>
+
+                <p>
+                    Descubre los símbolos y personajes que forman parte
+                    de las aventuras del héroe de Hyrule.
+                </p>
+
+            </div>
+
+            <div class="lore-grid">
+
+                <article class="lore-card">
+                    <span class="card-index">01 / ARMA LEGENDARIA</span>
+                    <h3>La Espada Maestra</h3>
+                    <p>
+                        Una espada emblemática de la saga, vinculada con
+                        distintas aventuras y con la lucha contra fuerzas
+                        oscuras.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">02 / VIRTUD</span>
+                    <h3>El valor</h3>
+                    <p>
+                        La voluntad de enfrentarse a peligros desconocidos
+                        y superar desafíos define muchas de las historias
+                        de Link.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">03 / TERRITORIO</span>
+                    <h3>El reino de Hyrule</h3>
+                    <p>
+                        Un mundo lleno de aldeas, templos, montañas,
+                        bosques y secretos que esperan ser descubiertos.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">04 / ALIANZA</span>
+                    <h3>La princesa Zelda</h3>
+                    <p>
+                        Zelda desempeña un papel esencial en muchas
+                        aventuras y comparte con Link la defensa
+                        del reino frente a grandes amenazas.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">05 / ADVERSARIO</span>
+                    <h3>Ganondorf</h3>
+                    <p>
+                        Uno de los principales antagonistas de la saga,
+                        asociado con conflictos que ponen en riesgo
+                        el futuro de Hyrule.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">06 / AVENTURA</span>
+                    <h3>Un héroe entre eras</h3>
+                    <p>
+                        Las distintas encarnaciones de Link protagonizan
+                        historias propias, cada una con nuevos mundos,
+                        aliados y desafíos.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="closing-section">
+
+            <div class="closing-mark" aria-hidden="true">✧</div>
+
+            <span class="section-label">
+                LA AVENTURA TE ESPERA
+            </span>
+
+            <h2>
+                Cada leyenda comienza con un paso.
+            </h2>
+
+            <p>
+                Recorre los misterios de Hyrule y descubre a los personajes
+                que dan vida a una de las sagas más reconocidas de los videojuegos.
+            </p>
+
+            <a href="/" class="button button-primary">
+                EXPLORAR HYRULE <span>↗</span>
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+
+        <p>HYRULE ARCHIVES · GUÍA DEL UNIVERSO ZELDA</p>
+
+        <nav class="footer-world-links" aria-label="Más páginas de Hyrule">
+            <a href="{{ url_for('zelda') }}">ZELDA</a>
+            <a href="{{ url_for('ganondorf') }}">GANONDORF</a>
+            <a href="{{ url_for('espada') }}">ESPADA MAESTRA</a>
+        </nav>
+        <a href="/">VOLVER AL INICIO ↑</a>
+
+        <p>Proyecto de fans, no oficial ni afiliado a Nintendo.</p>
+
+    </footer>
+
+</div>
+
+</body>
+</html>

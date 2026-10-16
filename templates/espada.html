@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1111">
+    <meta name="description" content="Descubre la historia y el legado de la Espada Maestra, el arma legendaria de Hyrule.">
+    <title>Espada Maestra | Hyrule Archives</title>
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='mastersword.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: dark;
+            --sword-gold: #d9bd7a;
+            --sword-muted: #b0bbb7;
+            --sword-line: rgba(217,189,122,.25);
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+        body { margin: 0; color: #f3f3eb; background: #0b1111; font-family: 'Manrope', sans-serif; }
+        a { color: inherit; text-decoration: none; }
+        .sword-page { min-height: 100vh; overflow: hidden; background: #0b1111; }
+        .sword-nav {
+            position: absolute;
+            inset: 0 0 auto;
+            z-index: 3;
+            display: flex;
+            min-height: 86px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 22px;
+            padding: 18px 7%;
+            border-bottom: 1px solid rgba(255,255,255,.14);
+        }
+        .sword-brand { display: flex; align-items: center; gap: 13px; font: 700 12px 'Cinzel', serif; letter-spacing: 2px; }
+        .sword-brand-mark {
+            display: grid;
+            width: 34px;
+            height: 34px;
+            place-items: center;
+            color: var(--sword-gold);
+            border: 1px solid var(--sword-gold);
+            transform: rotate(45deg);
+        }
+        .sword-brand-mark span { transform: rotate(-45deg); }
+        .sword-nav-links { display: flex; align-items: center; gap: 25px; }
+        .sword-nav-links a { color: #d7ded8; font-size: 9px; font-weight: 800; letter-spacing: 1.4px; transition: color .2s ease; }
+        .sword-nav-links a:hover { color: var(--sword-gold); }
+        .sword-nav-links .sword-nav-home { padding: 11px 15px; border: 1px solid var(--sword-line); }
+        .sword-hero {
+            position: relative;
+            display: grid;
+            min-height: min(900px, 100svh);
+            min-height: max(720px, min(900px, 100svh));
+            grid-template-columns: 1.05fr .95fr;
+            align-items: center;
+            gap: 30px;
+            padding: 145px 7% 85px;
+            overflow: hidden;
+            isolation: isolate;
+            background: #101918;
+        }
+        .sword-backdrop {
+            position: absolute;
+            z-index: -2;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(5,11,11,.97), rgba(5,11,11,.8) 43%, rgba(5,11,11,.4) 100%),
+                linear-gradient(0deg, #0b1111 0%, transparent 55%),
+                url("{{ url_for('static', filename='mastersword.jpg') }}") center / cover no-repeat;
+            filter: saturate(.72);
+            transform: scale(1.025);
+            animation: sword-reveal 1.25s ease-out both;
+        }
+        .sword-glow {
+            position: absolute;
+            z-index: -1;
+            top: 13%;
+            right: 8%;
+            width: 35vw;
+            height: 35vw;
+            max-width: 500px;
+            max-height: 500px;
+            border-radius: 50%;
+            background: rgba(186,198,145,.16);
+            filter: blur(90px);
+            pointer-events: none;
+        }
+        .sword-copy { max-width: 670px; animation: sword-rise .85s .1s both; }
+        .sword-eyebrow, .sword-label { color: var(--sword-gold); font-size: 10px; font-weight: 800; letter-spacing: 3px; }
+        .sword-eyebrow { display: flex; align-items: center; gap: 13px; }
+        .sword-eyebrow::before { width: 36px; height: 1px; content: ""; background: currentColor; }
+        .sword-copy h1 {
+            margin: 24px 0 0;
+            color: #f6f3e9;
+            font: 500 clamp(49px, 7.5vw, 94px)/1.08 'Cinzel', serif;
+            letter-spacing: -2px;
+            text-shadow: 0 12px 44px rgba(0,0,0,.38);
+        }
+        .sword-copy h1 em { color: #e3d39d; font-style: normal; }
+        .sword-subtitle { margin: 20px 0 0; color: #d9dfd6; font-size: 10px; font-weight: 800; letter-spacing: 3.5px; }
+        .sword-description { max-width: 530px; margin: 22px 0 0; color: #c2cbc3; font-size: 13px; line-height: 2; }
+        .sword-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 31px; }
+        .sword-button {
+            display: inline-flex;
+            min-height: 50px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 20px;
+            color: #141710;
+            background: var(--sword-gold);
+            border: 1px solid var(--sword-gold);
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            transition: transform .25s ease, background .25s ease, border-color .25s ease;
+        }
+        .sword-button:hover { transform: translateY(-3px); background: #f1e3b8; }
+        .sword-button--outline { color: #f5f5ed; background: rgba(255,255,255,.035); border-color: rgba(255,255,255,.34); }
+        .sword-button--outline:hover { color: var(--sword-gold); background: rgba(217,189,122,.08); border-color: var(--sword-gold); }
+        .sword-art { display: grid; min-width: 0; place-items: center; animation: sword-rise 1s .2s both; }
+        .sword-art img {
+            display: block;
+            width: min(100%, 670px);
+            max-height: 60vh;
+            object-fit: contain;
+            filter: drop-shadow(0 24px 50px rgba(0,0,0,.5));
+            transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .7s ease;
+        }
+        .sword-art:hover img { transform: translateY(-5px) scale(1.02); filter: drop-shadow(0 28px 60px rgba(183,199,141,.18)); }
+        .sword-index { position: absolute; right: 7%; bottom: 30px; color: rgba(255,255,255,.68); font-size: 9px; letter-spacing: 2px; }
+        .sword-index strong { color: var(--sword-gold); }
+        .sword-facts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: #0d1514;
+            border-top: 1px solid var(--sword-line);
+            border-bottom: 1px solid var(--sword-line);
+        }
+        .sword-fact { display: grid; min-height: 110px; align-content: center; justify-items: center; gap: 8px; padding: 18px; text-align: center; }
+        .sword-fact + .sword-fact { border-left: 1px solid var(--sword-line); }
+        .sword-fact span { color: var(--sword-gold); font-size: 9px; font-weight: 800; letter-spacing: 2px; }
+        .sword-fact strong { font: 500 15px 'Cinzel', serif; }
+        .sword-story { padding: 100px 7%; background: radial-gradient(ellipse at 10% 10%, rgba(75,101,74,.16), transparent 42%), #0b1111; }
+        .sword-story-inner { display: grid; grid-template-columns: .7fr 1.3fr; align-items: start; gap: clamp(35px, 8vw, 110px); width: min(1100px, 100%); margin: 0 auto; }
+        .sword-story-mark { color: rgba(217,189,122,.2); font: 500 clamp(92px, 15vw, 175px)/1 'Cinzel', serif; }
+        .sword-story-copy h2, .sword-legacy h2, .sword-ending h2 { margin: 15px 0 0; font: 500 clamp(30px, 4.5vw, 50px)/1.3 'Cinzel', serif; }
+        .sword-story-copy p { margin: 18px 0 0; color: var(--sword-muted); font-size: 13px; line-height: 2.1; }
+        .sword-divider { width: 60px; height: 1px; margin: 26px 0; background: var(--sword-gold); }
+        .sword-legacy { padding: 95px 7%; background: #101918; border-top: 1px solid rgba(255,255,255,.05); }
+        .sword-legacy-inner { width: min(1100px, 100%); margin: 0 auto; }
+        .sword-legacy-intro { max-width: 650px; margin-bottom: 40px; }
+        .sword-legacy-intro > p:last-child { margin: 15px 0 0; color: var(--sword-muted); font-size: 13px; line-height: 2; }
+        .sword-cards { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 15px; }
+        .sword-card { min-height: 195px; padding: 25px 23px; background: linear-gradient(145deg, #1a2722, #0d1513); border: 1px solid rgba(255,255,255,.08); transition: transform .3s ease, border-color .3s ease; }
+        .sword-card:hover { transform: translateY(-5px); border-color: rgba(217,189,122,.52); }
+        .sword-card span { color: var(--sword-gold); font-size: 9px; font-weight: 800; letter-spacing: 2px; }
+        .sword-card h3 { margin: 23px 0 0; font: 500 18px 'Cinzel', serif; }
+        .sword-card p { margin: 11px 0 0; color: var(--sword-muted); font-size: 11px; line-height: 1.9; }
+        .sword-ending { padding: 83px 7%; text-align: center; background: radial-gradient(ellipse at center, rgba(139,157,103,.15), transparent 65%), #0a100f; border-top: 1px solid var(--sword-line); }
+        .sword-ending h2 { max-width: 760px; margin: 14px auto 0; }
+        .sword-ending p { max-width: 560px; margin: 17px auto 25px; color: var(--sword-muted); font-size: 12px; line-height: 2; }
+        .sword-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 25px 7%; color: #89948f; background: #070c0b; border-top: 1px solid rgba(255,255,255,.08); font-size: 9px; letter-spacing: 1px; }
+        .sword-footer a { transition: color .2s ease; }
+        .sword-footer a:hover { color: var(--sword-gold); }
+        @keyframes sword-rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes sword-reveal { from { opacity: .5; transform: scale(1.07); } to { opacity: 1; transform: scale(1.025); } }
+        @media (max-width: 800px) {
+            .sword-hero { grid-template-columns: 1fr .8fr; gap: 12px; padding-inline: 6%; }
+            .sword-story { padding: 75px 6%; }
+            .sword-story-inner { grid-template-columns: 1fr; gap: 20px; }
+            .sword-story-mark { font-size: 90px; }
+            .sword-legacy { padding: 75px 6%; }
+            .sword-cards { grid-template-columns: repeat(2, minmax(0,1fr)); }
+            .sword-nav { padding-inline: 5%; }
+        }
+        @media (max-width: 560px) {
+            .sword-nav { min-height: 74px; }
+            .sword-brand { gap: 10px; font-size: 9px; letter-spacing: 1px; }
+            .sword-brand-mark { width: 28px; height: 28px; }
+            .sword-nav-links { gap: 0; }
+            .sword-nav-links > a:not(.sword-nav-home) { display: none; }
+            .sword-nav-links .sword-nav-home { padding: 10px 11px; font-size: 8px; }
+            .sword-hero { min-height: 890px; min-height: 100svh; grid-template-columns: 1fr; align-content: center; gap: 15px; padding: 125px 6% 85px; }
+            .sword-backdrop { background-position: 58% center; }
+            .sword-copy h1 { font-size: clamp(43px, 12vw, 66px); }
+            .sword-subtitle { font-size: 8px; letter-spacing: 2.4px; }
+            .sword-description { font-size: 12px; }
+            .sword-actions { flex-direction: column; }
+            .sword-art img { max-height: 32vh; }
+            .sword-index { right: 6%; bottom: 20px; font-size: 7px; }
+            .sword-fact { min-height: 90px; padding: 12px 5px; }
+            .sword-fact span { font-size: 7px; letter-spacing: 1px; }
+            .sword-fact strong { font-size: 10px; }
+            .sword-cards { grid-template-columns: 1fr; }
+            .sword-card { min-height: 165px; }
+            .sword-footer { flex-direction: column; align-items: center; text-align: center; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='character-polish.css') }}">
+    <script src="{{ url_for('static', filename='character-motion.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='profile-interactions.js') }}" defer></script>
+</head>
+<body>
+    <div class="reading-progress" role="progressbar" aria-label="Progreso de lectura"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <span aria-hidden="true"></span>
+    </div>
+    <div class="sword-page">
+        <header class="sword-nav">
+            <a class="sword-brand" href="/" aria-label="Hyrule Archives, inicio">
+                <span class="sword-brand-mark"><span>✦</span></span>
+                <span>HYRULE ARCHIVES</span>
+            </a>
+            <nav class="sword-nav-links" aria-label="Navegación principal">
+                <a href="#historia">HISTORIA</a>
+                <a href="#legado">LEGADO</a>
+                <span class="sword-world-links" aria-label="Explorar personajes">
+                    <a href="{{ url_for('link') }}">LINK</a>
+                    <a href="{{ url_for('zelda') }}">ZELDA</a>
+                    <a href="{{ url_for('ganondorf') }}">GANONDORF</a>
+                    <a href="{{ url_for('espada') }}" aria-current="page">ESPADA MAESTRA</a>
+                </span>
+                <a class="sword-nav-home" href="/">← INICIO</a>
+            </nav>
+        </header>
+        <main>
+            <section class="sword-hero" aria-labelledby="sword-title">
+                <div class="sword-backdrop" aria-hidden="true"></div>
+                <div class="sword-glow" aria-hidden="true"></div>
+                <div class="sword-copy">
+                    <p class="sword-eyebrow">EL SÍMBOLO DEL HÉROE</p>
+                    <h1 id="sword-title">La <em>Espada</em> Maestra</h1>
+                    <p class="sword-subtitle">LA HOJA QUE DESTIERRA LA OSCURIDAD</p>
+                    <p class="sword-description">
+                        Forjada para enfrentar el mal, la Espada Maestra es mucho más que un arma:
+                        es un símbolo de valor, esperanza y del vínculo entre el héroe y Hyrule.
+                    </p>
+                    <div class="sword-actions">
+                        <a class="sword-button" href="#historia">DESCUBRIR SU LEYENDA <span>↗</span></a>
+                        <a class="sword-button sword-button--outline" href="{{ url_for('link') }}">CONOCER AL HÉROE</a>
+                        <button class="sword-button sword-button--outline profile-favorite" type="button"
+                                data-favorite-id="sword" data-favorite-title="Espada Maestra" data-favorite-href="{{ url_for('espada') }}">
+                            ♡ GUARDAR EN FAVORITOS
+                        </button>
+                    </div>
+                </div>
+                <div class="sword-art">
+                    <img src="{{ url_for('static', filename='mastersword.jpg') }}" alt="La Espada Maestra, arma legendaria de Hyrule" fetchpriority="high" decoding="async">
+                    <button class="profile-gallery-open" type="button"
+                            data-profile-gallery-open
+                            data-gallery-extra="{{ url_for('static', filename='hyrule.jpg') }}"
+                            data-gallery-extra-alt="Paisaje del reino de Hyrule"
+                            data-gallery-extra-caption="La leyenda de la Espada Maestra continúa en Hyrule"
+                            aria-label="Abrir galería de la Espada Maestra">VER GALERÍA <span aria-hidden="true">↗</span></button>
+                </div>
+                <p class="sword-index"><strong>01</strong> / RELIQUIAS DE HYRULE</p>
+            </section>
+            <section class="sword-facts" aria-label="Atributos de la Espada Maestra">
+                <div class="sword-fact"><span>01 / ORIGEN</span><strong>Una reliquia ancestral</strong></div>
+                <div class="sword-fact"><span>02 / PROPÓSITO</span><strong>Enfrentar la oscuridad</strong></div>
+                <div class="sword-fact"><span>03 / VÍNCULO</span><strong>El héroe de Hyrule</strong></div>
+            </section>
+            <section class="sword-story" id="historia">
+                <div class="sword-story-inner">
+                    <div class="sword-story-mark" aria-hidden="true">01</div>
+                    <div class="sword-story-copy">
+                        <span class="sword-label">UNA HOJA CON HISTORIA</span>
+                        <h2>La espada elegida por el héroe.</h2>
+                        <p>
+                            Conocida también como la Espada del Héroe, esta arma legendaria
+                            aparece en distintas eras de Hyrule. Su historia y su origen varían
+                            entre juegos, pero su misión permanece ligada a combatir las fuerzas
+                            que amenazan el reino.
+                        </p>
+                        <div class="sword-divider" aria-hidden="true"></div>
+                        <p>
+                            Su poder no reside solo en el filo: la leyenda destaca el valor de
+                            quien puede empuñarla y la esperanza que representa para quienes
+                            protegen Hyrule.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section class="sword-legacy" id="legado">
+                <div class="sword-legacy-inner">
+                    <div class="sword-legacy-intro">
+                        <span class="sword-label">PODER · PROPÓSITO · LEYENDA</span>
+                        <h2>El legado de la hoja sagrada.</h2>
+                        <p>Los detalles cambian con cada aventura, pero su lugar en la leyenda perdura.</p>
+                    </div>
+                    <div class="sword-cards">
+                        <article class="sword-card"><span>01 / DESTINO</span><h3>El arma del héroe</h3><p>Su historia está ligada al héroe que se alza para proteger Hyrule.</p></article>
+                        <article class="sword-card"><span>02 / PROPÓSITO</span><h3>Contra la oscuridad</h3><p>La espada es conocida por enfrentarse a fuerzas malignas.</p></article>
+                        <article class="sword-card"><span>03 / ESPÍRITU</span><h3>Una voluntad propia</h3><p>En varias historias, su poder se relaciona con una presencia sagrada.</p></article>
+                        <article class="sword-card"><span>04 / HYRULE</span><h3>Un símbolo de esperanza</h3><p>Su imagen representa la resistencia del reino frente a sus amenazas.</p></article>
+                        <article class="sword-card"><span>05 / LINK</span><h3>El vínculo con el héroe</h3><p>Link y la Espada Maestra comparten un lugar central en muchas aventuras.</p></article>
+                        <article class="sword-card"><span>06 / ETERNIDAD</span><h3>Una leyenda viva</h3><p>Cada entrega renueva su historia dentro del universo de Zelda.</p></article>
+                    </div>
+                </div>
+            </section>
+            <section class="sword-ending">
+                <span class="sword-label">LA AVENTURA CONTINÚA</span>
+                <h2>El valor puede cambiar el destino.</h2>
+                <p>Vuelve a Hyrule Archives para explorar sus personajes y aventuras.</p>
+                <a class="sword-button" href="/">EXPLORAR HYRULE ARCHIVES <span>↗</span></a>
+            </section>
+        </main>
+        <footer class="sword-footer">
+            <span>HYRULE ARCHIVES · GUÍA DEL UNIVERSO ZELDA</span>
+            <a href="{{ url_for('link') }}">LINK</a>
+            <a href="{{ url_for('zelda') }}">ZELDA</a>
+            <a href="{{ url_for('ganondorf') }}">GANONDORF</a>
+            <span>Proyecto de fans, no oficial ni afiliado a Nintendo.</span>
+        </footer>
+    </div>
+</body>
+</html>

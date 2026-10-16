@@ -1,0 +1,1054 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zelda | The Legend of Zelda</title>
+
+    <meta name="description" content="Descubre la historia, el legado y el poder de la princesa Zelda, guardiana de Hyrule.">
+
+    <meta name="theme-color" content="#090d13">
+
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='zelda.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #d8bb78;
+            --gold-light: #f4e5b8;
+            --dark: #080b10;
+            --panel: #10151c;
+            --muted: #a9b0bb;
+            --line: rgba(216, 187, 120, 0.23);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            background: var(--dark);
+            color: #f4f1e9;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button, a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .zelda-site {
+            position: relative;
+            min-height: 100vh;
+            background: var(--dark);
+            isolation: isolate;
+        }
+
+        /* NAVEGACIÓN */
+
+        .topbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 20;
+            width: 100%;
+            min-height: 88px;
+            padding: 22px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .brand-symbol {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            transform: rotate(45deg);
+            font-size: 16px;
+        }
+
+        .brand-symbol span {
+            transform: rotate(-45deg);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.7px;
+            color: #d1d3d6;
+            transition: color .25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .nav-back {
+            border: 1px solid var(--line);
+            padding: 12px 18px;
+            color: var(--gold-light) !important;
+        }
+
+        /* PORTADA CINEMATOGRÁFICA */
+
+        .hero {
+            min-height: 780px;
+            min-height: min(900px, 100svh);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: #101722;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(5, 8, 13, .96) 0%,
+                    rgba(5, 8, 13, .82) 38%,
+                    rgba(5, 8, 13, .35) 72%,
+                    rgba(5, 8, 13, .55) 100%
+                ),
+                linear-gradient(
+                    0deg,
+                    #080b10 0%,
+                    transparent 34%,
+                    rgba(5, 8, 13, .12) 100%
+                ),
+                url("{{ url_for('static', filename='Zelda-card.jpg') }}");
+
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.025);
+            animation: cinematicReveal 1.3s ease-out both;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: .15;
+            background-image: radial-gradient(
+                rgba(255,255,255,.45) .6px,
+                transparent .6px
+            );
+            background-size: 5px 5px;
+            mask-image: linear-gradient(to right, black, transparent);
+        }
+
+        .hero-content {
+            width: min(1240px, 100%);
+            padding: 150px 7% 115px;
+            position: relative;
+            z-index: 2;
+            animation: riseIn .9s .1s both;
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 38px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero h1 {
+            max-width: 780px;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(65px, 10vw, 132px);
+            line-height: .98;
+            font-weight: 500;
+            letter-spacing: -4px;
+            color: #fffdf7;
+            text-shadow: 0 8px 60px rgba(0,0,0,.3);
+        }
+
+        .hero h1 span {
+            display: block;
+            color: var(--gold-light);
+            font-size: .45em;
+            line-height: 1.8;
+            letter-spacing: 9px;
+            font-weight: 400;
+        }
+
+        .hero-subtitle {
+            margin-top: 22px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 5px;
+            color: #e1d6b8;
+        }
+
+        .hero-description {
+            max-width: 510px;
+            margin-top: 25px;
+            color: #c4c9d0;
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .hero-actions {
+            margin-top: 36px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .button {
+            min-height: 52px;
+            padding: 0 24px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.7px;
+            transition: transform .25s, background .25s, border-color .25s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .button-primary {
+            background: var(--gold);
+            color: #11130f;
+            border: 1px solid var(--gold);
+        }
+
+        .button-primary:hover {
+            background: var(--gold-light);
+        }
+
+        .button-secondary {
+            color: #fff;
+            border: 1px solid rgba(255,255,255,.35);
+            background: rgba(255,255,255,.035);
+        }
+
+        .button-secondary:hover {
+            border-color: var(--gold);
+            background: rgba(216,187,120,.08);
+        }
+
+        .hero-index {
+            position: absolute;
+            z-index: 3;
+            right: 7%;
+            bottom: 64px;
+            color: rgba(255,255,255,.72);
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .hero-index strong {
+            color: var(--gold);
+        }
+
+        /* FRANJA DE IDENTIDAD */
+
+        .identity-strip {
+            position: relative;
+            z-index: 4;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            background: #0d1117;
+        }
+
+        .identity-item {
+            min-height: 115px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+        }
+
+        .identity-item + .identity-item {
+            border-left: 1px solid var(--line);
+        }
+
+        .identity-item span {
+            color: var(--gold);
+            font-size: 9px;
+            letter-spacing: 3px;
+            font-weight: 800;
+        }
+
+        .identity-item h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* SECCIONES */
+
+        .section {
+            padding: 110px 7%;
+        }
+
+        .section-heading {
+            max-width: 700px;
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            color: var(--gold);
+            font-size: 10px;
+            letter-spacing: 4px;
+            font-weight: 800;
+        }
+
+        .section-heading h2 {
+            margin-top: 18px;
+            font-family: 'Cinzel', serif;
+            font-weight: 500;
+            font-size: clamp(32px, 5vw, 54px);
+            line-height: 1.25;
+        }
+
+        .section-heading p {
+            margin-top: 20px;
+            max-width: 620px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        .story-section {
+            background:
+                radial-gradient(ellipse at 100% 10%, rgba(47,65,83,.15), transparent 45%),
+                #0a0e13;
+        }
+
+        .story-layout {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 75px;
+            align-items: start;
+        }
+
+        .story-number {
+            color: rgba(216,187,120,.2);
+            font-family: 'Cinzel', serif;
+            font-size: clamp(90px, 15vw, 180px);
+            line-height: 1;
+        }
+
+        .story-copy h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-light);
+            font-size: 25px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .story-copy p {
+            margin-bottom: 18px;
+            color: #aeb5bf;
+            font-size: 13px;
+            line-height: 2.1;
+        }
+
+        .story-divider {
+            width: 65px;
+            height: 1px;
+            background: var(--gold);
+            margin: 28px 0;
+        }
+
+        /* TARJETAS PREMIUM */
+
+        .lore-section {
+            background: #0d1117;
+            border-top: 1px solid rgba(255,255,255,.04);
+        }
+
+        .lore-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .lore-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
+            padding: 30px 27px;
+            background: linear-gradient(145deg, #151c25, #0c1016);
+            border: 1px solid rgba(255,255,255,.08);
+            transition: transform .3s ease, border-color .3s ease;
+        }
+
+        .lore-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(216,187,120,.55);
+        }
+
+        .lore-card::after {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            right: -60px;
+            bottom: -60px;
+            border: 1px solid rgba(216,187,120,.16);
+            transform: rotate(45deg);
+        }
+
+        .lore-card .card-index {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .lore-card h3 {
+            margin-top: 31px;
+            font-family: 'Cinzel', serif;
+            font-size: 21px;
+            font-weight: 500;
+        }
+
+        .lore-card p {
+            margin-top: 13px;
+            color: #aeb5bf;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        /* CIERRE PROMOCIONAL */
+
+        .closing-section {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 105px 7%;
+            background:
+                radial-gradient(ellipse at center, rgba(125,99,49,.18), transparent 65%),
+                #090c11;
+            border-top: 1px solid var(--line);
+        }
+
+        .closing-mark {
+            color: var(--gold);
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .closing-section h2 {
+            max-width: 760px;
+            margin: 0 auto;
+            font-family: 'Cinzel', serif;
+            font-weight: 500;
+            font-size: clamp(30px, 5vw, 53px);
+            line-height: 1.4;
+        }
+
+        .closing-section p {
+            max-width: 530px;
+            margin: 22px auto 30px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        /* PIE DE PÁGINA */
+
+        .footer {
+            min-height: 100px;
+            padding: 28px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: #06080c;
+            border-top: 1px solid rgba(255,255,255,.08);
+        }
+
+        .footer p,
+        .footer a {
+            color: #858c96;
+            font-size: 9px;
+            letter-spacing: 1.7px;
+            line-height: 1.8;
+        }
+
+        .footer a:hover {
+            color: var(--gold);
+        }
+
+        /* ANIMACIONES */
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes cinematicReveal {
+            from {
+                opacity: .5;
+                transform: scale(1.07);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1.025);
+            }
+        }
+
+        /* TABLET */
+
+        @media (max-width: 900px) {
+            .topbar {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .nav-links {
+                gap: 17px;
+            }
+
+            .nav-links a {
+                font-size: 9px;
+                letter-spacing: 1px;
+            }
+
+            .hero-content {
+                padding-left: 6%;
+                padding-right: 6%;
+            }
+
+            .story-layout {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .story-number {
+                font-size: 100px;
+            }
+
+            .lore-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* MÓVILES */
+
+        @media (max-width: 600px) {
+            .topbar {
+                min-height: 75px;
+                padding: 17px 5%;
+            }
+
+            .brand {
+                font-size: 10px;
+                letter-spacing: 1.5px;
+                gap: 10px;
+            }
+
+            .brand-symbol {
+                width: 27px;
+                height: 27px;
+                font-size: 13px;
+            }
+
+            .nav-links {
+                gap: 0;
+            }
+
+            .nav-links .nav-section-link {
+                display: none;
+            }
+
+            .nav-back {
+                padding: 10px 12px;
+                font-size: 9px !important;
+            }
+
+            .hero {
+                min-height: 760px;
+                min-height: 94svh;
+            }
+
+            .hero-background {
+                background-position: 58% center;
+                background-image:
+                    linear-gradient(
+                        90deg,
+                        rgba(5,8,13,.88),
+                        rgba(5,8,13,.52)
+                    ),
+                    linear-gradient(
+                        0deg,
+                        #080b10 0%,
+                        transparent 60%
+                    ),
+                    url("{{ url_for('static', filename='Zelda-card.jpg') }}");
+            }
+
+            .hero-content {
+                padding: 135px 6% 95px;
+            }
+
+            .eyebrow {
+                font-size: 9px;
+                letter-spacing: 2.5px;
+            }
+
+            .hero h1 {
+                font-size: clamp(57px, 16vw, 85px);
+                letter-spacing: -2px;
+            }
+
+            .hero h1 span {
+                font-size: .37em;
+                letter-spacing: 5px;
+            }
+
+            .hero-subtitle {
+                font-size: 10px;
+                letter-spacing: 3px;
+            }
+
+            .hero-description {
+                font-size: 12px;
+                line-height: 1.9;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .hero-index {
+                right: 6%;
+                bottom: 25px;
+                font-size: 8px;
+            }
+
+            .identity-item {
+                padding: 19px 8px;
+                min-height: 95px;
+            }
+
+            .identity-item span {
+                font-size: 8px;
+                letter-spacing: 1px;
+            }
+
+            .identity-item h2 {
+                font-size: 11px;
+            }
+
+            .section {
+                padding: 75px 6%;
+            }
+
+            .section-heading {
+                margin-bottom: 33px;
+            }
+
+            .section-heading h2 {
+                font-size: 32px;
+            }
+
+            .story-number {
+                font-size: 85px;
+            }
+
+            .story-copy h3 {
+                font-size: 22px;
+            }
+
+            .lore-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lore-card {
+                min-height: 210px;
+                padding: 26px;
+            }
+
+            .closing-section {
+                padding: 80px 6%;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='character-polish.css') }}">
+    <script src="{{ url_for('static', filename='character-motion.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='profile-interactions.js') }}" defer></script>
+</head>
+
+<body>
+<div class="reading-progress" role="progressbar" aria-label="Progreso de lectura"
+     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <span aria-hidden="true"></span>
+</div>
+
+<div class="zelda-site">
+
+    <header class="topbar">
+
+        <a href="/" class="brand" aria-label="The Legend of Zelda, inicio">
+            <span class="brand-symbol"><span>✦</span></span>
+            <span>HYRULE ARCHIVES</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navegación principal">
+            <a class="nav-section-link" href="#historia">HISTORIA</a>
+            <a class="nav-section-link" href="#legado">LEGADO</a>
+            <span class="nav-world-links" aria-label="Explorar personajes">
+                <a href="{{ url_for('link') }}">LINK</a>
+                <a href="{{ url_for('zelda') }}" aria-current="page">ZELDA</a>
+                <a href="{{ url_for('ganondorf') }}">GANONDORF</a>
+                <a href="{{ url_for('espada') }}">ESPADA MAESTRA</a>
+            </span>
+            <a class="nav-back" href="/">← INICIO</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section class="hero" aria-labelledby="hero-title">
+
+            <div class="hero-background" aria-hidden="true"></div>
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    LAS CRÓNICAS DE HYRULE
+                </div>
+
+                <h1 id="hero-title">
+                    ZELDA
+                    <span>PRINCESA DE HYRULE</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    SABIDURÍA · VALOR · DESTINO
+                </p>
+
+                <p class="hero-description">
+                    En el corazón de una tierra marcada por antiguas
+                    leyendas, una princesa guarda los secretos de un
+                    reino cuyo destino trasciende generaciones.
+                    Descubre la historia de Zelda, su legado y su
+                    papel en el universo de Hyrule.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="#historia" class="button button-primary">
+                        DESCUBRIR SU HISTORIA <span>↗</span>
+                    </a>
+
+                    <a href="#legado" class="button button-secondary">
+                        EXPLORAR SU LEGADO
+                    </a>
+                    <button class="button button-secondary profile-favorite" type="button"
+                            data-favorite-id="zelda" data-favorite-title="Zelda" data-favorite-href="{{ url_for('zelda') }}">
+                        ♡ GUARDAR EN FAVORITOS
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="hero-index">
+                <strong>02</strong> / PERSONAJES LEGENDARIOS
+            </div>
+
+        </section>
+
+        <section class="identity-strip" aria-label="Atributos de Zelda">
+
+            <div class="identity-item">
+                <span>01 / ESENCIA</span>
+                <h2>Sabiduría</h2>
+            </div>
+
+            <div class="identity-item">
+                <span>02 / ORIGEN</span>
+                <h2>Reino de Hyrule</h2>
+            </div>
+
+            <div class="identity-item">
+                <span>03 / LEGADO</span>
+                <h2>La leyenda continúa</h2>
+            </div>
+
+        </section>
+
+        <section class="section story-section" id="historia">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    UNA HISTORIA EXTRAORDINARIA
+                </span>
+
+                <h2>Mucho más que una princesa.</h2>
+
+                <p>
+                    Una figura central en una saga de aventuras,
+                    misterios ancestrales y destinos entrelazados.
+                </p>
+
+            </div>
+
+            <div class="story-layout">
+
+                <figure class="story-portrait">
+                    <img src="{{ url_for('static', filename='zelda.jpg') }}" alt="Retrato de la princesa Zelda" loading="lazy" decoding="async">
+                    <button class="profile-gallery-open" type="button"
+                            data-profile-gallery-open
+                            data-gallery-extra="{{ url_for('static', filename='Zelda-card.jpg') }}"
+                            data-gallery-extra-alt="Ilustración de Zelda para la colección"
+                            data-gallery-extra-caption="Zelda · La princesa de Hyrule"
+                            aria-label="Abrir galería de Zelda">VER GALERÍA <span aria-hidden="true">↗</span></button>
+                    <figcaption>02 / LA PRINCESA</figcaption>
+                </figure>
+
+                <div class="story-copy">
+
+                    <h3>El espíritu de Hyrule</h3>
+
+                    <p>
+                        Zelda ocupa un lugar fundamental en las historias
+                        de The Legend of Zelda. Su inteligencia, determinación
+                        y conexión con el reino la convierten en una figura
+                        esencial frente a las amenazas que se ciernen sobre
+                        su pueblo.
+                    </p>
+
+                    <p>
+                        Su historia cambia con cada aventura. En algunos
+                        relatos investiga secretos antiguos; en otros,
+                        participa directamente en la lucha por proteger
+                        Hyrule y preservar su futuro.
+                    </p>
+
+                    <div class="story-divider"></div>
+
+                    <p>
+                        Su legado no se define únicamente por su título,
+                        sino también por las decisiones, sacrificios y
+                        conocimientos que contribuyen a dar forma a la leyenda.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="section lore-section" id="legado">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    SU UNIVERSO
+                </span>
+
+                <h2>Los pilares de una leyenda.</h2>
+
+                <p>
+                    Explora los elementos que ayudan a comprender
+                    la importancia de Zelda en el universo de Hyrule.
+                </p>
+
+            </div>
+
+            <div class="lore-grid">
+
+                <article class="lore-card">
+                    <span class="card-index">01 / SABIDURÍA</span>
+                    <h3>Conocimiento ancestral</h3>
+                    <p>
+                        La investigación, la inteligencia y el conocimiento
+                        de las antiguas leyendas desempeñan un papel clave
+                        en distintas aventuras de Zelda.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">02 / HYRULE</span>
+                    <h3>Un reino por proteger</h3>
+                    <p>
+                        Hyrule es el escenario de incontables historias,
+                        con culturas, personajes y secretos que enriquecen
+                        cada nueva aventura.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">03 / TRIFUERZA</span>
+                    <h3>El poder sagrado</h3>
+                    <p>
+                        La Trifuerza es uno de los símbolos más reconocibles
+                        de la saga y está asociada con poder, sabiduría y valor.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">04 / EL HÉROE</span>
+                    <h3>El vínculo con Link</h3>
+                    <p>
+                        Link y Zelda comparten un papel fundamental en muchas
+                        entregas, aunque la naturaleza de su relación cambia
+                        según la historia.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">05 / AMENAZA</span>
+                    <h3>La sombra de Ganondorf</h3>
+                    <p>
+                        En varias historias, Ganondorf representa una amenaza
+                        decisiva para la estabilidad y el destino del reino.
+                    </p>
+                </article>
+
+                <article class="lore-card">
+                    <span class="card-index">06 / ETERNIDAD</span>
+                    <h3>Una leyenda viva</h3>
+                    <p>
+                        Cada entrega ofrece una nueva perspectiva de sus
+                        protagonistas, ampliando el universo y el legado
+                        de The Legend of Zelda.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="closing-section">
+
+            <div class="closing-mark" aria-hidden="true">✧</div>
+
+            <span class="section-label">
+                EL DESTINO DE HYRULE
+            </span>
+
+            <h2>
+                Algunas leyendas nunca dejan de brillar.
+            </h2>
+
+            <p>
+                Descubre los personajes, los misterios y las aventuras
+                que han convertido a Hyrule en un mundo inolvidable.
+            </p>
+
+            <a href="/" class="button button-primary">
+                EXPLORAR EL UNIVERSO <span>↗</span>
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+
+        <p>HYRULE ARCHIVES · GUÍA DEL UNIVERSO ZELDA</p>
+
+        <nav class="footer-world-links" aria-label="Más páginas de Hyrule">
+            <a href="{{ url_for('link') }}">LINK</a>
+            <a href="{{ url_for('ganondorf') }}">GANONDORF</a>
+            <a href="{{ url_for('espada') }}">ESPADA MAESTRA</a>
+        </nav>
+        <a href="/">VOLVER AL INICIO ↑</a>
+
+        <p>
+            Proyecto de fans, no oficial ni afiliado a Nintendo.
+        </p>
+
+    </footer>
+
+</div>
+
+</body>
+</html>

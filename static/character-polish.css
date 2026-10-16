@@ -1,0 +1,660 @@
+/* Shared visual language for character and relic pages. */
+.link-site,
+.zelda-site,
+.ganondorf-page,
+.sword-page {
+    --archive-accent: #d8bb78;
+    --archive-accent-soft: rgba(216, 187, 120, .26);
+    --archive-line: rgba(255, 255, 255, .12);
+}
+
+.link-site {
+    --archive-accent: #a5c38d;
+    --archive-accent-soft: rgba(165, 195, 141, .28);
+}
+
+.zelda-site {
+    --archive-accent: #e4cb86;
+    --archive-accent-soft: rgba(228, 203, 134, .28);
+}
+
+.ganondorf-page {
+    --archive-accent: #dfb477;
+    --archive-accent-soft: rgba(223, 180, 119, .28);
+}
+
+.sword-page {
+    --archive-accent: #d9bd7a;
+    --archive-accent-soft: rgba(217, 189, 122, .28);
+}
+
+.reading-progress {
+    position: fixed;
+    z-index: 2000;
+    inset: 0 0 auto;
+    height: 3px;
+    overflow: hidden;
+    pointer-events: none;
+    background: rgba(255, 255, 255, .12);
+}
+
+.reading-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #a5c38d, #e4cb86, #dfb477);
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+}
+
+.link-site :focus-visible,
+.zelda-site :focus-visible,
+.ganondorf-page :focus-visible,
+.sword-page :focus-visible {
+    outline: 2px solid var(--archive-accent);
+    outline-offset: 5px;
+}
+
+.home-page .main-nav a[aria-current="location"],
+.link-site .nav-links > a[aria-current="location"],
+.zelda-site .nav-links > a[aria-current="location"],
+.ganondorf-page .ganondorf-nav-links > a[aria-current="location"],
+.sword-page .sword-nav-links > a[aria-current="location"] {
+    color: var(--archive-accent, #e4cb86);
+}
+
+.home-page .main-nav a[aria-current="location"]::after {
+    transform: scaleX(1);
+}
+
+.link-site .hero-background,
+.zelda-site .hero-background,
+.ganondorf-page .ganondorf-backdrop,
+.sword-page .sword-backdrop,
+.home-page .hero-video,
+.home-page .hero-overlay,
+.link-site .hero-video,
+.link-site .hero-overlay {
+    will-change: transform;
+    transition: translate .18s ease-out;
+}
+
+.link-site .hero-background.is-pointer-active,
+.zelda-site .hero-background.is-pointer-active,
+.ganondorf-page .ganondorf-backdrop.is-pointer-active,
+.sword-page .sword-backdrop.is-pointer-active,
+.home-page .hero-video.is-pointer-active,
+.home-page .hero-overlay.is-pointer-active,
+.link-site .hero-video.is-pointer-active,
+.link-site .hero-overlay.is-pointer-active {
+    translate: var(--pointer-shift-x, 0px) var(--pointer-shift-y, 0px);
+}
+
+.link-site .hero-content,
+.zelda-site .hero-content,
+.ganondorf-page .ganondorf-hero-content,
+.home-page .hero-content,
+.sword-page .sword-copy {
+    transition: translate .2s ease-out;
+}
+
+.link-site .hero-content,
+.zelda-site .hero-content,
+.ganondorf-page .ganondorf-hero-content,
+.home-page .hero-content,
+.sword-page .sword-copy {
+    translate: var(--pointer-shift-x, 0px) var(--pointer-shift-y, 0px);
+}
+
+.info-card,
+.character-card,
+.game-card,
+.lore-card,
+.story-portrait,
+.ganondorf-card,
+.ganondorf-portrait,
+.sword-card,
+.sword-art,
+.home-page .sword-image-wrap {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.info-card.is-pointer-active,
+.character-card.is-pointer-active,
+.game-card.is-pointer-active,
+.lore-card.is-pointer-active,
+.story-portrait.is-pointer-active,
+.ganondorf-card.is-pointer-active,
+.ganondorf-portrait.is-pointer-active,
+.sword-card.is-pointer-active,
+.sword-art.is-pointer-active,
+.home-page .sword-image-wrap.is-pointer-active {
+    transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-4px);
+    transition: transform .12s ease-out, border-color .3s ease, box-shadow .3s ease;
+}
+
+.character-card.is-pointer-active::before,
+.info-card.is-pointer-active .info-card-content,
+.game-card.is-pointer-active .game-card-content,
+.character-card.is-pointer-active .character-info {
+    transform: translateZ(20px);
+}
+
+.story-portrait.is-pointer-active img,
+.ganondorf-portrait.is-pointer-active img,
+.sword-art.is-pointer-active img {
+    transform: scale(1.035) translateZ(12px);
+}
+
+.sword-page .sword-art.is-pointer-active img {
+    transform: scale(1.035) translateZ(12px);
+}
+
+.info-card.is-pointer-active,
+.character-card.is-pointer-active,
+.game-card.is-pointer-active,
+.lore-card.is-pointer-active,
+.story-portrait.is-pointer-active,
+.ganondorf-card.is-pointer-active,
+.ganondorf-portrait.is-pointer-active,
+.sword-card.is-pointer-active,
+.sword-art.is-pointer-active,
+.home-page .sword-image-wrap.is-pointer-active {
+    border-color: var(--archive-accent-soft);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, .4), 0 0 28px var(--archive-accent-soft);
+}
+
+.nav-world-links,
+.ganondorf-world-links,
+.sword-world-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 1.5vw, 23px);
+}
+
+.topbar .nav-world-links a,
+.ganondorf-nav .ganondorf-world-links a,
+.sword-nav .sword-world-links a {
+    color: rgba(245, 244, 236, .75);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.15px;
+    transition: color .25s ease;
+}
+
+.topbar .nav-world-links a:hover,
+.ganondorf-nav .ganondorf-world-links a:hover,
+.sword-nav .sword-world-links a:hover,
+.topbar .nav-world-links a[aria-current="page"],
+.ganondorf-nav .ganondorf-world-links a[aria-current="page"],
+.sword-nav .sword-world-links a[aria-current="page"] {
+    color: var(--archive-accent);
+}
+
+.link-site .hero,
+.zelda-site .hero,
+.ganondorf-page .ganondorf-hero {
+    min-height: max(720px, min(900px, 100svh));
+}
+
+.link-site .button,
+.zelda-site .button,
+.ganondorf-page .ganondorf-button {
+    border-radius: 2px;
+}
+
+.link-site .story-layout,
+.zelda-site .story-layout {
+    grid-template-columns: minmax(230px, .8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(32px, 6vw, 80px);
+}
+
+.story-portrait {
+    position: relative;
+    min-width: 0;
+    height: clamp(320px, 38vw, 490px);
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 50% 35%, var(--archive-accent-soft), transparent 63%),
+        rgba(255, 255, 255, .025);
+    border: 1px solid var(--archive-accent-soft);
+}
+
+.story-portrait::before {
+    position: absolute;
+    z-index: 1;
+    inset: 12px;
+    content: "";
+    border: 1px solid rgba(255, 255, 255, .15);
+    pointer-events: none;
+}
+
+.story-portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: saturate(.88);
+    transition: transform .8s cubic-bezier(.2, .7, .2, 1), filter .6s ease;
+}
+
+.story-portrait:hover img {
+    transform: scale(1.035);
+    filter: saturate(1);
+}
+
+.story-portrait figcaption {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    left: 24px;
+    z-index: 2;
+    color: rgba(255, 255, 255, .85);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .85);
+}
+
+.link-site .lore-card,
+.zelda-site .lore-card,
+.ganondorf-page .ganondorf-card {
+    border-radius: 2px;
+}
+
+.ganondorf-page .ganondorf-stat,
+.ganondorf-page .ganondorf-card,
+.ganondorf-page .ganondorf-portrait {
+    border-radius: 2px;
+}
+
+.ganondorf-page .ganondorf-portrait {
+    min-height: 0;
+    height: clamp(320px, 38vw, 490px);
+}
+
+.ganondorf-page .ganondorf-portrait img {
+    max-height: none;
+}
+
+.ganondorf-page .ganondorf-nav-links,
+.sword-page .sword-nav-links {
+    gap: clamp(10px, 1.5vw, 23px);
+}
+
+.ganondorf-page .ganondorf-nav-links .ganondorf-world-links a,
+.sword-page .sword-nav-links .sword-world-links a {
+    color: rgba(245, 244, 236, .75);
+}
+
+.ganondorf-page .ganondorf-nav-links .ganondorf-world-links a:hover,
+.sword-page .sword-nav-links .sword-world-links a:hover,
+.ganondorf-page .ganondorf-nav-links .ganondorf-world-links a[aria-current="page"],
+.sword-page .sword-nav-links .sword-world-links a[aria-current="page"] {
+    color: var(--archive-accent);
+}
+
+.sword-page .sword-art {
+    position: relative;
+    width: clamp(230px, 31vw, 410px);
+    aspect-ratio: .73;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(217, 189, 122, .2), transparent 62%),
+        rgba(8, 14, 13, .6);
+    border: 1px solid rgba(217, 189, 122, .36);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, .36);
+}
+
+.sword-page .sword-art::after {
+    position: absolute;
+    inset: 12px;
+    content: "";
+    border: 1px solid rgba(255, 255, 255, .16);
+    pointer-events: none;
+}
+
+.sword-page .sword-art img {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: 50% 53%;
+    filter: saturate(.76) brightness(.9);
+    transition: transform .8s cubic-bezier(.2, .7, .2, 1), filter .6s ease;
+}
+
+.sword-page .sword-art:hover img {
+    transform: scale(1.045);
+    filter: saturate(1) brightness(1);
+}
+
+.sword-page .sword-art:hover img {
+    filter: drop-shadow(0 20px 45px rgba(183, 199, 141, .16)) saturate(1);
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
+    transition-delay: calc(var(--reveal-order, 0) * 75ms);
+}
+
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-reveal.is-visible.is-pointer-active {
+    transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-4px);
+    transition: transform .12s ease-out, border-color .3s ease, box-shadow .3s ease;
+}
+
+.link-site .footer a,
+.zelda-site .footer a,
+.ganondorf-footer a,
+.sword-footer a {
+    transition: color .22s ease;
+}
+
+.footer-world-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root) {
+    animation: archive-page-out .18s ease both;
+}
+
+::view-transition-new(root) {
+    animation: archive-page-in .32s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+@keyframes archive-page-out {
+    to { opacity: 0; }
+}
+
+@keyframes archive-page-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-favorite[aria-pressed="true"] {
+    color: var(--archive-accent);
+    border-color: var(--archive-accent);
+}
+
+.profile-gallery-open {
+    position: absolute;
+    z-index: 3;
+    right: 24px;
+    bottom: 48px;
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 255, 255, .48);
+    background: rgba(8, 12, 11, .72);
+    color: #fff;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.profile-gallery-open:hover {
+    transform: translateY(-2px);
+    border-color: var(--archive-accent);
+    background: rgba(8, 12, 11, .9);
+}
+
+.ganondorf-page .ganondorf-portrait {
+    position: relative;
+    overflow: hidden;
+}
+
+.sword-page .sword-art .profile-gallery-open {
+    right: 22px;
+    bottom: 24px;
+    left: 22px;
+    text-align: center;
+}
+
+.profile-gallery-dialog {
+    position: fixed;
+    width: min(1000px, calc(100vw - 32px));
+    max-width: none;
+    max-height: min(90vh, 900px);
+    padding: clamp(48px, 7vw, 76px) clamp(54px, 9vw, 96px) 56px;
+    overflow: visible;
+    border: 1px solid var(--archive-accent-soft, rgba(216, 187, 120, .35));
+    background: #101512;
+    color: #f6f3e9;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, .7);
+}
+
+.profile-gallery-dialog::backdrop {
+    background: rgba(3, 6, 5, .86);
+    backdrop-filter: blur(9px);
+}
+
+.profile-gallery-dialog figure {
+    display: grid;
+    justify-items: center;
+    gap: 16px;
+    margin: 0;
+}
+
+.profile-gallery-dialog img {
+    display: block;
+    width: 100%;
+    max-height: min(65vh, 680px);
+    object-fit: contain;
+    touch-action: pan-y;
+}
+
+.profile-gallery-dialog figcaption {
+    color: rgba(246, 243, 233, .8);
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-align: center;
+}
+
+.profile-gallery-close,
+.profile-gallery-nav {
+    position: absolute;
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .24);
+    background: rgba(255, 255, 255, .06);
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: border-color .2s ease, background .2s ease;
+}
+
+.profile-gallery-close:hover,
+.profile-gallery-nav:hover {
+    border-color: var(--archive-accent);
+    background: rgba(255, 255, 255, .12);
+}
+
+.profile-gallery-close {
+    top: 16px;
+    right: 16px;
+}
+
+.profile-gallery-prev {
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+}
+
+.profile-gallery-next {
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+}
+
+.profile-gallery-count {
+    position: absolute;
+    right: 0;
+    bottom: 18px;
+    left: 0;
+    margin: 0;
+    color: rgba(246, 243, 233, .6);
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-align: center;
+}
+
+.interaction-status {
+    position: fixed;
+    z-index: 2200;
+    right: 20px;
+    bottom: 20px;
+    max-width: min(420px, calc(100vw - 40px));
+    margin: 0;
+    padding: 13px 18px;
+    border: 1px solid var(--archive-accent-soft, rgba(216, 187, 120, .35));
+    background: rgba(13, 19, 16, .96);
+    color: #f6f3e9;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.interaction-status.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.link-site .footer-world-links a,
+.zelda-site .footer-world-links a {
+    font-size: 9px;
+    letter-spacing: 1.4px;
+}
+
+.link-site .footer a:hover,
+.zelda-site .footer a:hover,
+.ganondorf-footer a:hover,
+.sword-footer a:hover {
+    color: var(--archive-accent);
+}
+
+@media (max-width: 1050px) {
+    .topbar .nav-world-links,
+    .ganondorf-nav .ganondorf-world-links,
+    .sword-nav .sword-world-links {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .link-site .story-layout,
+    .zelda-site .story-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+
+    .ganondorf-page .ganondorf-portrait {
+        height: clamp(300px, 60vw, 460px);
+    }
+
+    .sword-page .sword-art {
+        width: clamp(190px, 34vw, 280px);
+    }
+}
+
+@media (max-width: 600px) {
+    .story-portrait {
+        height: min(112vw, 430px);
+    }
+
+    .ganondorf-page .ganondorf-portrait {
+        height: min(112vw, 430px);
+    }
+
+    .sword-page .sword-art {
+        width: min(72vw, 300px);
+        aspect-ratio: .9;
+    }
+
+    .scroll-reveal {
+        transform: translateY(14px);
+        transition-duration: .5s;
+    }
+
+    .profile-gallery-dialog {
+        width: calc(100vw - 20px);
+        padding: 64px 48px 56px;
+    }
+
+    .profile-gallery-prev { left: 6px; }
+    .profile-gallery-next { right: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .scroll-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .story-portrait img,
+    .sword-page .sword-art img {
+        transition: none;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+
+    .info-card,
+    .character-card,
+    .game-card,
+    .lore-card,
+    .story-portrait,
+    .ganondorf-card,
+    .ganondorf-portrait,
+    .sword-card,
+    .sword-art,
+    .home-page .sword-image-wrap,
+    .hero-background,
+    .ganondorf-backdrop,
+    .sword-backdrop,
+    .hero-video,
+    .hero-overlay,
+    .hero-content,
+    .ganondorf-hero-content,
+    .sword-copy {
+        transform: none !important;
+        translate: none !important;
+        will-change: auto;
+    }
+
+    .profile-gallery-open,
+    .profile-gallery-close,
+    .profile-gallery-nav,
+    .interaction-status {
+        transition: none;
+    }
+}
